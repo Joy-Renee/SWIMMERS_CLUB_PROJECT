@@ -1,14 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import date, time
+from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 
-
-class Swimmer(db.Model):
+class Swimmer(db.Model,SerializerMixin):
     __tablename__ = 'swimmers'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False )
+    name = db.Column(db.String, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     swimming_style = db.Column(db.String, nullable=False)
     best_lap = db.Column(db.Float, nullable=False)
@@ -16,14 +15,27 @@ class Swimmer(db.Model):
 
     coach_id = db.Column(db.Integer, db.ForeignKey('coaches.id'))
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    trainingSession_id = db.Column(db.Integer, db.ForeignKey('trainingSessions.id'))
 
-    coach = db.relationship("Coach", back_populates="swimmer")
+    coach = db.relationship("Coach", back_populates="swimmers")
     team = db.relationship('Team', back_populates='swimmers')
-    trainingSession = db.relationship('TrainingSession', back_populates='swimmers')
-    
 
-class Coach(db.Model):
+    serialize_rules = ('-coach.swimmers','-team.swimmers',)    
+
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'age': self.age,
+            'swimming_style': self.swimming_style,
+            'best_lap': self.best_lap,
+            'experience': self.experience,
+            'coach_id': self.coach_id,
+            'team_id': self.team_id,
+        }
+
+
+class Coach(db.Model, SerializerMixin):
     __tablename__ = 'coaches'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,56 +44,91 @@ class Coach(db.Model):
     experience = db.Column(db.Float, nullable=False)
     expertise = db.Column(db.String, nullable=False)
 
-    swimmer_id = db.Column(db.Integer, db.ForeignKey('swimmers.id'))
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    trainingSession_id = db.Column(db.Integer, db.ForeignKey('trainingSessions.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), unique=True)
+    training_session = db.relationship('TrainingSession', uselist=False, back_populates='coach')
 
-    swimmer = db.relationship("Swimmer", back_populates="coaches")
-    team = db.relationship('Team', back_populates='coaches')
-    trainingSession = db.relationship('TrainingSession', back_populates='coaches')
+    team = db.relationship('Team', back_populates='coach')
+    swimmers = db.relationship("Swimmer", back_populates="coach")
 
-class Team(db.Model):
+
+    serialize_rules = ('-team.coaches','-swimmers.coaches',) 
+
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'age': self.age,
+            'experience': self.experience,
+            'expertise': self.expertise,
+            'team_id': self.team_id,
+        }
+
+
+class Team(db.Model,SerializerMixin):
     __tablename__ = 'teams'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
-    swimmer_id = db.Column(db.Integer, db.ForeignKey('swimmers.id'))
-    coach_id = db.Column(db.Integer, db.ForeignKey('coaches.id'))
+    coach = db.relationship('Coach', back_populates='team', uselist=False)
+    swimmers = db.relationship('Swimmer', back_populates='team', cascade='all, delete-orphan')
+    training_session = db.relationship('TrainingSession', back_populates='team', uselist=False)
+    event = db.relationship('Event', back_populates='team', uselist=False)
 
-    coach = db.relationship('Coach', back_populates='teams')
-    swimmer = db.relationship('Swimmer', back_populates='teams')
-    event = db.relationship('Event', back_populates='teams', cascade='all, delete-orphan')
-    trainingSession = db.relationship('TrainingSession', back_populates='teams', cascade='all, delete-orphan')
+    serialize_rules = ('-training_session.teams','-coach.teams','-swimmers.teams','-event.teams',) 
 
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'coach_id': self.coach_id,
+        }
 
-class Event(db.Model):
+class Event(db.Model,SerializerMixin):
     __tablename__ = 'events'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String(100), nullable=True)
 
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), unique=True)
 
-    team = db.relationship('Team', back_populates='events', cascade='all, delete-orphan')
+    team = db.relationship('Team', back_populates='event')
 
-class TrainingSession(db.Model):
-    __tablename__ = 'trainingSessions'
+    serialize_rules = ('-team.events',)
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'team_id': self.team_id,
+        }
+class TrainingSession(db.Model,SerializerMixin):
+    __tablename__ = 'training_sessions'
 
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=True)
     time = db.Column(db.Time, nullable=True)
     description = db.Column(db.String(100), nullable=True)
-    coach_id = db.Column(db.Integer, db.ForeignKey('coaches.id'))
-    student_id = db.Column(db.Integer, db.ForeignKey('swimmers.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), unique=True)
+    coach_id = db.Column(db.Integer, db.ForeignKey('coaches.id'), unique=True)
 
-    team = db.relationship('Team', back_populates='trainingSessions', cascade='all, delete-orphan')
-
-
-
+    coach = db.relationship('Coach', back_populates='training_session')
+    team = db.relationship('Team', back_populates='training_session', uselist=False)
 
 
+    serialize_rules = ('-team.training_sessions','-coach.training_sessions',)
 
-
+    
+    def serialize(self):
+        return {
+            'id': self.id,
+            'date': self.date.isoformat() if self.date else None,
+            'time': self.time.isoformat() if self.time else None,
+            'description': self.description,
+            'team_id': self.team_id,
+            'coach_id': self.coach_id,
+        }
 
