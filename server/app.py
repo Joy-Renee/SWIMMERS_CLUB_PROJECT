@@ -116,6 +116,19 @@ def coaches():
         db.session.delete(coach)
         db.session.commit()
         return '', 204
+    
+@app.route('/teams', methods=['GET', 'POST'])
+def teams():
+    if request.method == 'GET':
+        teams = Team.query.all()
+        return jsonify([team.serialize() for team in teams])
+
+    elif request.method == 'POST':
+        data = request.get_json()
+        new_team = Team(name=data['name'])
+        db.session.add(new_team)
+        db.session.commit()
+        return jsonify(new_team.serialize()), 201
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -82,7 +82,7 @@ class Team(db.Model,SerializerMixin):
         return {
             'id': self.id,
             'name': self.name,
-            'coach_id': self.coach_id,
+            # 'coach_id': self.coach_id,
         }
 
 class Event(db.Model,SerializerMixin):
