@@ -2,6 +2,8 @@ from flask_restful import Api, Resource
 from flask_migrate import Migrate
 from flask import Flask, make_response, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError 
+from sqlalchemy.orm.exc import NoResultFound
 import os
 from models import db, Swimmer, Coach, Team, Event, TrainingSession
 
