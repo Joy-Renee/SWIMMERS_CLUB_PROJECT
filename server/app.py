@@ -129,6 +129,44 @@ def teams():
         db.session.add(new_team)
         db.session.commit()
         return jsonify(new_team.serialize()), 201
+    #crud for events#
+@app.route('/events', methods=['GET', 'POST'])
+def events():
+    if request.method == 'GET':
+        events = Event.query.all()
+        return jsonify([event.serialize() for event in events])
+    elif request.method == 'POST':
+        data = request.get_json()
+        try:
+            new_event = Event(
+                name=data['name'],
+                description=data['description']
+            )
+            db.session.add(new_event)
+            db.session.commit()
+            return jsonify(new_event.serialize()), 201
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({"error": "Data integrity error"}), 400
 
+@app.route('/events/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def event_detail(id):
+    try:
+        event = Event.query.get_or_404(id)
+        if request.method == 'GET':
+            return jsonify(event.serialize())
+        elif request.method == 'PUT':
+            data = request.get_json()
+            event.name = data.get('name', event.name)
+            event.description = data.get('description', event.description)
+            db.session.commit()
+            return jsonify(event.serialize())
+        elif request.method == 'DELETE':
+            db.session.delete(event)
+            db.session.commit()
+            return jsonify({"message": "Event deleted"}), 200
+    except NoResultFound:
+        return jsonify({"error": "Event not found"}), 404
+    
 if __name__ == '__main__':
     app.run(debug=True)
