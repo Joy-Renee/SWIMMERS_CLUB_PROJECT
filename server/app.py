@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask import Flask, make_response, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError 
+from datetime import datetime
 from sqlalchemy.orm.exc import NoResultFound
 import os
 from models import db, Swimmer, Coach, Team, Event, TrainingSession
@@ -169,6 +170,94 @@ def event_detail(id):
             return jsonify({"message": "Event deleted"}), 200
     except NoResultFound:
         return jsonify({"error": "Event not found"}), 404
+
+# Create a new training session
+@app.route('/training_sessions', methods=['POST'])
+def create_training_session():
+    data = request.get_json()
+    try:
+        # Convert date and time from string to Python objects
+        session_date = datetime.strptime(data.get('date'), '%Y-%m-%d').date()
+        session_time = datetime.strptime(data.get('time'), '%H:%M:%S').time()
+
+        # Create new TrainingSession instance
+        new_session = TrainingSession(
+            date=session_date,
+            time=session_time,
+            description=data.get('description'),
+            team_id=data.get('team_id'),
+            coach_id=data.get('coach_id')
+        )
+
+        # Add and commit new session to the database
+        db.session.add(new_session)
+        db.session.commit()
+
+        # Return the serialized new session as a JSON response
+        return jsonify(new_session.serialize()), 201
+
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({"error": f"Data integrity error: {e}"}), 400
+    except ValueError as e:
+        return jsonify({"error": f"Value error: {e}"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {e}"}), 500
+
+
+
+# Read a single training session by ID
+@app.route('/training_sessions/<int:id>', methods=['GET'])
+def get_training_session(id):
+    session = TrainingSession.query.get_or_404(id)
+    return jsonify(session.serialize())
+
+# Read all training sessions
+@app.route('/training_sessions', methods=['GET'])
+def get_training_sessions():
+    sessions = TrainingSession.query.all()
+    return jsonify([session.serialize() for session in sessions])
+
+# Update a training session by ID
+@app.route('/training_sessions/<int:id>', methods=['PUT'])
+def update_training_session(id):
+    session = TrainingSession.query.get_or_404(id)
+    data = request.get_json()
+
+    try:
+        # Convert date and time from string to Python objects if they are present in the request
+        if 'date' in data:
+            session_date = datetime.strptime(data.get('date'), '%Y-%m-%d').date()
+            session.date = session_date
+        if 'time' in data:
+            session_time = datetime.strptime(data.get('time'), '%H:%M:%S').time()
+            session.time = session_time
+        if 'description' in data:
+            session.description = data['description']
+        if 'team_id' in data:
+            session.team_id = data['team_id']
+        if 'coach_id' in data:
+            session.coach_id = data['coach_id']
+
+        db.session.commit()
+
+        return jsonify(session.serialize())
+
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({"error": f"Data integrity error: {e}"}), 400
+    except ValueError as e:
+        return jsonify({"error": f"Value error: {e}"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {e}"}), 500
+
+# Delete a training session by ID
+@app.route('/training_sessions/<int:id>', methods=['DELETE'])
+def delete_training_session(id):
+    session = TrainingSession.query.get_or_404(id)
+    db.session.delete(session)
+    db.session.commit()
+    return '', 204
     
 if __name__ == '__main__':
     app.run(debug=True)
