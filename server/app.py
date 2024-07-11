@@ -74,7 +74,48 @@ def swimmers():
         db.session.delete(swimmer)
         db.session.commit()
         return '', 204
+
+@app.route('/coaches', methods=['GET', 'POST', 'PATCH', 'DELETE'])
+def coaches():
+    if request.method == 'GET':
+        coaches = Coach.query.all()
+        return jsonify([coach.serialize() for coach in coaches])
+    elif request.method == 'POST':
+        data = request.get_json()
+        new_coach =  Coach(name=data['name'], age=data['age'], experience=data['experience'], expertise=data['expertise'])
+        db.session.add(new_coach)
+        db.session.commit()
+        return jsonify(new_coach.serialize()), 201
+    
+    elif request.method == 'PATCH':
+        data = request.get_json()
+        coach = Coach.query.get(data['id'])
+        if not coach:
+            return make_response(jsonify({'error': 'Coach not found'}), 404)
         
+        if 'name' in data:
+            coach.name = data['name']
+        if 'age' in data:
+            coach.age = data['age']
+        if 'experience' in data:
+            coach.experience = data['experience']
+        if 'expertise' in data:
+            coach.expertise = data['expertise']
+        if 'team_id' in data:
+            coach.team_id = data['team_id']
+
+        db.session.commit()
+        return jsonify(coach.serialize()), 200
+    
+    elif request.method == 'DELETE':
+        data = request.get_json()
+        coach = Coach.query.get(data['id'])
+        if not coach:
+            return make_response(jsonify({'error': 'Coach not found'}), 404)
+
+        db.session.delete(coach)
+        db.session.commit()
+        return '', 204
 
 if __name__ == '__main__':
     app.run(debug=True)
