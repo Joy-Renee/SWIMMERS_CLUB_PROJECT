@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Join() {
   return (
@@ -20,9 +21,7 @@ function Join() {
             Join our vibrant community of swimmers and take your aquatic skills to the next level. Our experienced coaches will help you reach your goals, whether you're a beginner or a seasoned competitor.
             </p>
             <div>
-            <button type="button" className="btn btn-primary">
-            Register as Swimmer
-                </button>
+            <Link to="/swimmerslogin"  type="button" className="btn next btn-danger">Register as Swimmer</Link>
             </div>
           </div>
         </div>
