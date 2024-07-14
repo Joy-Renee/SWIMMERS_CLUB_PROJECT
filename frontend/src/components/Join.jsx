@@ -33,9 +33,7 @@ function Join() {
             Share your passion for swimming and help shape the next generation of aquatic athletes. Our club is always looking for experienced coaches to join our team and guide our swimmers to success.
             </p>
             <div>
-            <button type="button" className="btn btn-primary">
-            Register as Coach
-                </button>
+            <Link to="/coacheslogin"  type="button" className="btn next btn-danger">Register as coach</Link>
             </div>
             
           </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function UpcomingEvents() {
 
@@ -35,9 +36,7 @@ function UpcomingEvents() {
               Join us for a day of fun in the sun at our annual Summer Splash event. Enjoy swimming, games, and a BBQ lunch.
               </p>
               <div>
-                <button type="button" className="btn btn-primary">
-                  register
-                </button>
+                <Link to="/summersplash"  type="button" className="btn next btn-danger">Register</Link>
               </div>
             </div>
           </div>
@@ -58,9 +57,8 @@ function UpcomingEvents() {
               Participate in our annual Swim-a-Thon fundraiser and help support our club's programs and scholarships.
               </p>
               <div>
-                <button type="button" className="btn btn-primary">
-                  register
-                </button>
+              <Link to="/Swimathon"  type="button" className="btn next btn-danger">Register</Link>
+              
               </div>
             </div>
           </div>
@@ -81,9 +79,7 @@ function UpcomingEvents() {
               Join us for our annual competitive swim meet, featuring swimmers from clubs across the region.
               </p>
               <div>
-                <button type="button" className="btn btn-primary">
-                  register
-                </button>
+              <Link to="/Competitiveswimee"  type="button" className="btn next btn-danger">Register</Link>
               </div>
             </div>
           </div>
