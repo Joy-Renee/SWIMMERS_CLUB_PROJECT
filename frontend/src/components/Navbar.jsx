@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-light ">
       <div className="container-fluid">
         <a className="navbar-brand text-white" href="/">
           Aqua Swimming Club
@@ -22,17 +22,17 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active text-white" aria-current="page" href="/">
+              <a className="nav-link active " aria-current="page" href="/">
                 Home
               </a>
             </li>
             <li className="nav-item">
-            <Link to={`/swimmerslogin`} className="btn btn-primary">
+            <Link to={`/swimmerslogin`} className="btn ">
             Register
           </Link>
             </li>
             <li className="nav-item">
-            <Link to={`/about`} className="btn btn-primary">
+            <Link to={`/about`} className="btn ">
             About Us
           </Link>
             </li>

@@ -20,7 +20,7 @@ function Pastevents() {
   };
 
   return (
-    <>
+    <div className="past">
       <div className="header">
         <h1 className="h1">Past Events</h1>
         <p className="p text-secondary">
@@ -84,7 +84,7 @@ function Pastevents() {
             </div>
           </div>
       </section>
-    </>
+    </div>
   );
 }
 

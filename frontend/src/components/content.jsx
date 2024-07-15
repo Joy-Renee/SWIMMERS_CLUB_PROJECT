@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "./footer";
 
-// import './Content.css'; 
+// import './Content.css';
 
 function Content() {
   const [swimmers, setSwimmers] = useState([]);
@@ -11,7 +11,6 @@ function Content() {
   const [trainingSessions, setTrainingSessions] = useState([]);
   const [coaches, setCoaches] = useState([]);
   const [currentTable, setCurrentTable] = useState(null);
-  
 
   useEffect(() => {
     fetchSwimmers();
@@ -22,68 +21,70 @@ function Content() {
   }, []);
 
   const fetchSwimmers = () => {
-    fetch('http://localhost:5000/swimmers', {
+    fetch("http://localhost:5000/swimmers", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => setSwimmers(data))
-    .catch(error => console.error('Error fetching swimmers:', error));
+      .then((response) => response.json())
+      .then((data) => setSwimmers(data))
+      .catch((error) => console.error("Error fetching swimmers:", error));
   };
 
   const fetchEvents = () => {
-    fetch('http://localhost:5000/events', {
+    fetch("http://localhost:5000/events", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => setEvents(data))
-    .catch(error => console.error('Error fetching events:', error));
+      .then((response) => response.json())
+      .then((data) => setEvents(data))
+      .catch((error) => console.error("Error fetching events:", error));
   };
 
   const fetchTeams = () => {
-    fetch('http://localhost:5000/teams', {
+    fetch("http://localhost:5000/teams", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => setTeams(data))
-    .catch(error => console.error('Error fetching teams:', error));
+      .then((response) => response.json())
+      .then((data) => setTeams(data))
+      .catch((error) => console.error("Error fetching teams:", error));
   };
 
   const fetchTrainingSessions = () => {
-    fetch('http://localhost:5000/training_sessions', {
+    fetch("http://localhost:5000/training_sessions", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => setTrainingSessions(data))
-    .catch(error => console.error('Error fetching training sessions:', error));
+      .then((response) => response.json())
+      .then((data) => setTrainingSessions(data))
+      .catch((error) =>
+        console.error("Error fetching training sessions:", error)
+      );
   };
 
   const fetchCoaches = () => {
-    fetch('http://localhost:5000/coaches', {
+    fetch("http://localhost:5000/coaches", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(data => setCoaches(data))
-    .catch(error => console.error('Error fetching coaches:', error));
+      .then((response) => response.json())
+      .then((data) => setCoaches(data))
+      .catch((error) => console.error("Error fetching coaches:", error));
   };
 
   const renderTable = () => {
-    switch(currentTable) {
-      case 'swimmers':
+    switch (currentTable) {
+      case "swimmers":
         return (
           <div className="swimmers-table-container">
             <h2>Swimmers List</h2>
@@ -107,7 +108,7 @@ function Content() {
             </table>
           </div>
         );
-      case 'events':
+      case "events":
         return (
           <div className="swimmers-table-container">
             <h2>Events List</h2>
@@ -131,7 +132,7 @@ function Content() {
             </table>
           </div>
         );
-      case 'teams':
+      case "teams":
         return (
           <div className="swimmers-table-container">
             <h2>Teams List</h2>
@@ -153,7 +154,7 @@ function Content() {
             </table>
           </div>
         );
-      case 'training_sessions':
+      case "training_sessions":
         return (
           <div className="swimmers-table-container">
             <h2>Training Sessions List</h2>
@@ -179,7 +180,7 @@ function Content() {
             </table>
           </div>
         );
-      case 'coaches':
+      case "coaches":
         return (
           <div className="swimmers-table-container">
             <h2>Coaches List</h2>
@@ -209,84 +210,88 @@ function Content() {
   };
 
   return (
-    <> 
+    <>
       <div className="background2">
         <div className="row">
           <div className="col-6 hero">
             <div>
-              <h2 className="h">Welcome Swimmers <br/> Your Journey begins here</h2>
+              <h2 className="h">
+                Welcome Swimmers <br /> Your Journey begins here
+              </h2>
             </div>
             <div>
-              <p className="p text-white">We are thrilled to welcome you to our swimming community! We are passionate about swimming and dedicated to providing a supportive and inclusive environment for all members.</p>
+              <p className="p text-white">
+                We are thrilled to welcome you to our swimming community! We are
+                passionate about swimming and dedicated to providing a
+                supportive and inclusive environment for all members.
+              </p>
             </div>
           </div>
         </div>
       </div>
-
       <div className="buttons-container">
-      <button className="butt" onClick={() => setCurrentTable('swimmers')}>
-  <span class="transition"></span>
-  <span class="gradient"></span>
-  <span class="label">View swimmers</span>
-</button>
-        <button className="butt" onClick={() => setCurrentTable('events')}>
-  <span class="transition"></span>
-  <span class="gradient"></span>
-  <span class="label">View events</span>
-</button>
-         <button className="butt" onClick={() => setCurrentTable('teams')}>
-  <span class="transition"></span>
-  <span class="gradient"></span>
-  <span class="label">View teams</span>
-</button>
-         <button className="butt" onClick={() => setCurrentTable('training_sessions')}>
-  <span class="transition"></span>
-  <span class="gradient"></span>
-  <span class="label">View Training Sessions</span>
-</button>
-         <button className="butt" onClick={() => setCurrentTable('coaches')}>
-  <span class="transition"></span>
-  <span class="gradient"></span>
-  <span class="label">View Coaches</span>
-</button>
+        <button className="butt" onClick={() => setCurrentTable("swimmers")}>
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">View swimmers</span>
+        </button>
+        <button className="butt" onClick={() => setCurrentTable("events")}>
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">View events</span>
+        </button>
+        <button className="butt" onClick={() => setCurrentTable("teams")}>
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">View teams</span>
+        </button>
+        <button
+          className="butt"
+          onClick={() => setCurrentTable("training_sessions")}
+        >
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">View Training Sessions</span>
+        </button>
+        <button className="butt" onClick={() => setCurrentTable("coaches")}>
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">View Coaches</span>
+        </button>
       </div>
-
       {renderTable()}.
       <div className="header">
-      <h1 className="h1">Upcoming Events</h1>
-      <p className="p text-secondary">
-        Check out some of our upcoming events.
-      </p>
-    </div>
-
-    <section className="events-container">
-      {events.map((event) => (
-        <div key={event.id} className="card event-card">
-          <img
-            src={event.image_url}
-            className="card-img-top"
-            alt={event.name}
-          />
-          <div className="card-body">
-            <div>
-              <h4>{event.name}</h4>
-            </div>
-            <div>
-              <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
-            </div>
-            <p className="card-text">
-              {event.description}
-            </p>
-            <div>
-          <Link to={`/events/${event.id}`} className="btn btn-primary">
-            Register
-          </Link>
+        <h1 className="h1">Upcoming Events</h1>
+        <p className="p text-secondary">
+          Check out some of our upcoming events.
+        </p>
+      </div>
+      <section className="events-container">
+        {events.map((event) => (
+          <div key={event.id} className="card event-card">
+            <img
+              src={event.image_url}
+              className="card-img-top"
+              alt={event.name}
+            />
+            <div className="card-body">
+              <div>
+                <h4>{event.name}</h4>
+              </div>
+              <div>
+                <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
+              </div>
+              <p className="card-text">{event.description}</p>
+              <div>
+                <Link to={`/events/${event.id}`} className="btn btn-primary">
+                  Register
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </section>
-      <Footer/>
+        ))}
+      </section>
+      <Footer />
     </>
   );
 }

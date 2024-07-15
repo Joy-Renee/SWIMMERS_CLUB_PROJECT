@@ -1,5 +1,5 @@
 import React from 'react';
-import '/home/vincent/Development/code/se-prep/phase-4/SWIMMERS_CLUB_PROJECT/frontend/src/css/summersplash.css';
+import '/home/victor/Moringa/Code/SE-phase-4/Group-work/SWIMMERS_CLUB_PROJECT/frontend/src/css/summersplash.css';
 
 function Competitiveswimee() {
   return (
