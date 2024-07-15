@@ -16,7 +16,6 @@ function Home(){
             <PastEvents/>
             <Join/>
             <Footer/>
-
         </div>
     )
 }

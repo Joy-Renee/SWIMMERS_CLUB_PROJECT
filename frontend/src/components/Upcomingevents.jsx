@@ -1,91 +1,66 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function UpcomingEvents() {
+function Upcomingevents() {
+  const [events, setEvents] = useState([]);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
+  const fetchData = () => {
+    fetch('http://localhost:5000/events', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => setEvents(data))
+    .catch(error => console.error('Error fetching data:', error));
+  };
 
-
-
-    
   return (
-    <div>
-      <div className="header">
-        <h1 className="h1">Upcoming Events</h1>
-        <p className="p text-secondary">
-          Check out our upcoming events and sign up to participate.
-        </p>
-      </div>
-      <div>
-        <div className="row ">
-          <div className="card col-4 ">
-            <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <div>
-                <h4>Summer Splash</h4>
-              </div>
-              <div>
-                <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
-              </div>
+    <>
+    <div className="header">
+      <h1 className="h1">Upcoming Events</h1>
+      <p className="p text-secondary">
+        Check out some of our upcoming events.
+      </p>
+    </div>
 
-              <p className="card-text">
-              Join us for a day of fun in the sun at our annual Summer Splash event. Enjoy swimming, games, and a BBQ lunch.
-              </p>
-              <div>
-                <Link to="/summersplash"  type="button" className="btn next btn-danger">Register</Link>
-              </div>
+    <section className="events-container">
+      {events.slice(0, 3).map((event) => (
+        <div key={event.id} className="card event-card">
+          <img
+            src={event.image_url}
+            className="card-img-top"
+            alt={event.name}
+          />
+          <div className="card-body">
+            <div>
+              <h4>{event.name}</h4>
             </div>
-          </div>
-          <div className="card col-4">
-            <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <div>
-                <h4>Swim-a-Thon</h4>
-              </div>
-              <div>
-                <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
-              </div>
-              <p className="card-text">
-              Participate in our annual Swim-a-Thon fundraiser and help support our club's programs and scholarships.
-              </p>
-              <div>
-              <Link to="/Swimathon"  type="button" className="btn next btn-danger">Register</Link>
-              
-              </div>
+            <div>
+              <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
             </div>
-          </div>
-          <div className="card col-4">
-            <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <div>
-                <h4>Competitive Swim Mee</h4>
-              </div>
-              <div>
-                <p>July 27, 2024 | 10am - 4pm | Aqua Swimmers Club Pool</p>
-              </div>
-              <p className="card-text">
-              Join us for our annual competitive swim meet, featuring swimmers from clubs across the region.
-              </p>
-              <div>
-              <Link to="/Competitiveswimee"  type="button" className="btn next btn-danger">Register</Link>
-              </div>
+            <p className="card-text">
+              {event.description}
+            </p>
+            <div>
+            <Link to={`/swimmerslogin`} className="btn btn-primary">
+            Register
+          </Link>
+          {/* <Link to={`/events/${event.id}`} className="btn btn-primary">
+            Register
+          </Link> */}
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ))}
+    </section>
+  </>
   );
 }
-export default UpcomingEvents;
+
+export default Upcomingevents;
