@@ -6,11 +6,15 @@ from models import db, Swimmer, Coach, Team, Event, TrainingSession, allocate_te
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm.exc import NoResultFound
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes by default
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///swimmersClub.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
