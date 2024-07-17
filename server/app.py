@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify, request
+from flask import Flask, make_response, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS, cross_origin
@@ -11,7 +11,19 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../frontend/build',
+    template_folder='../frontend/build'
+)
+
+...
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
 CORS(app)  # Enable CORS for all routes by default
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
@@ -30,9 +42,9 @@ def allocate_coach_and_team():
     else:
         return None, None
 
-@app.route('/')
-def home():
-    return "<h1>Swim Club Management System</h1>"
+# @app.route('/')
+# def home():
+#     return "<h1>Swim Club Management System</h1>"
 
 @app.route('/swimmers', methods=['GET', 'POST', 'PATCH'])
 @cross_origin()  
