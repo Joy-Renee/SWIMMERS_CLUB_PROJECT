@@ -20,10 +20,10 @@ const routes = [
         path: "/coacheslogin",
         element: <Coacheslogin />,
     },
-    {
-        path: "/competitiveswimee",
-        element: <Competitiveswimee />,
-    },
+    // {
+    //     path: "/competitiveswimee",
+    //     element: <Competitiveswimee />,
+    // },
     {
         path: "/events/:eventId",
         element: <EventRegistration />,

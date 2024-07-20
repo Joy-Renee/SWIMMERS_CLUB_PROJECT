@@ -21,7 +21,7 @@ function Content() {
   }, []);
 
   const fetchSwimmers = () => {
-    fetch("http://localhost:5000/swimmers", {
+    fetch("https://swimmers-club-project-ymun.onrender.com/swimmers", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function Content() {
   };
 
   const fetchEvents = () => {
-    fetch("http://localhost:5000/events", {
+    fetch("https://swimmers-club-project-ymun.onrender.com/events", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ function Content() {
   };
 
   const fetchTeams = () => {
-    fetch("http://localhost:5000/teams", {
+    fetch("https://swimmers-club-project-ymun.onrender.com/teams", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function Content() {
   };
 
   const fetchTrainingSessions = () => {
-    fetch("http://localhost:5000/training_sessions", {
+    fetch("https://swimmers-club-project-ymun.onrender.com/training_sessions", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function Content() {
   };
 
   const fetchCoaches = () => {
-    fetch("http://localhost:5000/coaches", {
+    fetch("https://swimmers-club-project-ymun.onrender.com/coaches", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -15,7 +15,7 @@ function EventRegistration() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/events/${eventId}`, {
+    fetch(`https://swimmers-club-project-ymun.onrender.com/${eventId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -36,7 +36,7 @@ function EventRegistration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/events/${eventId}/register`, {
+    fetch(`https://swimmers-club-project-ymun.onrender.com/events/${eventId}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

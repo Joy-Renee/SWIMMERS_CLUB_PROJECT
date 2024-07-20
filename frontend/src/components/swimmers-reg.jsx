@@ -25,7 +25,7 @@ function Swimmerslogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-      const endpoint = isRegistering ? 'http://localhost:5000/swimmers' : 'http://localhost:5000/swimmers/login';
+      const endpoint = isRegistering ? 'https://swimmers-club-project-ymun.onrender.com/swimmers' : 'https://swimmers-club-project-ymun.onrender.com/swimmers/login';
       const dataToSend = isRegistering ? {
         name: formData.fullName,
         age: formData.age,

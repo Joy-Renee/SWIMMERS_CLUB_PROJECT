@@ -25,7 +25,7 @@ function Coacheslogin() {
     e.preventDefault();
 
     
-    const endpoint = isRegistering ? 'http://localhost:5000/coaches' : 'http://localhost:5000/coaches/login';
+    const endpoint = isRegistering ? 'https://swimmers-club-project-ymun.onrender.com/coaches' : 'https://swimmers-club-project-ymun.onrender.com/coaches/login';
     const dataToSend = isRegistering ? {
       name: formData.fullName,
       age: formData.age,

@@ -9,7 +9,7 @@ function Upcomingevents() {
   }, []);
 
   const fetchData = () => {
-    fetch('http://localhost:5000/events', {
+    fetch('https://swimmers-club-project-ymun.onrender.com/events', {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
