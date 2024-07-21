@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.9a65e5d0.css",
-    "main.js": "/static/js/main.8875a141.js",
-    "static/js/453.c3ec5181.chunk.js": "/static/js/453.c3ec5181.chunk.js",
-    "index.html": "/index.html",
-    "main.9a65e5d0.css.map": "/static/css/main.9a65e5d0.css.map",
-    "main.8875a141.js.map": "/static/js/main.8875a141.js.map",
-    "453.c3ec5181.chunk.js.map": "/static/js/453.c3ec5181.chunk.js.map"
+    "main.css": "/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css",
+    "main.js": "/SWIMMERS_CLUB_PROJECT/static/js/main.98f19cd4.js",
+    "static/js/453.c3ec5181.chunk.js": "/SWIMMERS_CLUB_PROJECT/static/js/453.c3ec5181.chunk.js",
+    "index.html": "/SWIMMERS_CLUB_PROJECT/index.html",
+    "main.9a65e5d0.css.map": "/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css.map",
+    "main.98f19cd4.js.map": "/SWIMMERS_CLUB_PROJECT/static/js/main.98f19cd4.js.map",
+    "453.c3ec5181.chunk.js.map": "/SWIMMERS_CLUB_PROJECT/static/js/453.c3ec5181.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a65e5d0.css",
-    "static/js/main.8875a141.js"
+    "static/js/main.98f19cd4.js"
   ]
 }
