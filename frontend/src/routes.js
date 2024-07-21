@@ -1,35 +1,45 @@
 import App from "./App";
 import Swimmerslogin from "./components/swimmers-reg";
 import Coacheslogin from "./components/coaches-reg";
-import Swimmersplash from "./components/summersplash";
-import Swimathon from "./components/swimathon";
 import Competitiveswimee from "./components/competitiveswimee";
+import EventRegistration from "./components/Eventregistration";
+import Members from "./components/members";
+import About from "./components/About";
+import Coaches from "./components/coaches";
+
 const routes = [
     {
         path: "/",
-        element: <App/>,
+        element: <App />,
     },
     {
         path: "/swimmerslogin",
-        element:<Swimmerslogin/>,
+        element: <Swimmerslogin />,
     },
     {
-        path: "/Coacheslogin",
-        element:<Coacheslogin/>,
+        path: "/coacheslogin",
+        element: <Coacheslogin />,
+    },
+    // {
+    //     path: "/competitiveswimee",
+    //     element: <Competitiveswimee />,
+    // },
+    {
+        path: "/events/:eventId",
+        element: <EventRegistration />,
     },
     {
-        path: "/summersplash",
-        element:<Swimmersplash/>
+        path:"/members",
+        element: <Members/>
     },
     {
-        path: "/swimathon",
-        element:<Swimathon/>
+        path:"/about",
+        element: <About/>
     },
     {
-        path: "/competitiveswimee",
-        element: <Competitiveswimee/>
+        path:"/coaches",
+        element: <Coaches/>
     }
+];
 
-   
-]
 export default routes;

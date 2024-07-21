@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">
+    <nav className="navbar navbar-expand-lg navbar-light ">
+      <div className="container-fluid">
+        <a className="navbar-brand text-white" href="/">
           Aqua Swimming Club
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -16,29 +17,24 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="#">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <a className="nav-link active " aria-current="page" href="/">
                 Home
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">
-                Events
-              </a>
+            <li className="nav-item">
+            <Link to={`/swimmerslogin`} className="btn ">
+            Register
+          </Link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">
-                Register
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">
-                About
-              </a>
+            <li className="nav-item">
+            <Link to={`/about`} className="btn ">
+            About Us
+          </Link>
             </li>
             
           </ul>

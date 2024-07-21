@@ -1,97 +1,91 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
-function PastEvents() {
+function Pastevents() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    fetch('https://swimmers-club-project-ymun.onrender.com/events', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => setEvents(data))
+    .catch(error => console.error('Error fetching data:', error));
+  };
+
   return (
-    <div className="ev">
-      <div className="header ">
+    <div className="past">
+      <div className="header">
         <h1 className="h1">Past Events</h1>
         <p className="p text-secondary">
-          Check out some of our previous events and their results.
+          Check out some of our past events and their results.
         </p>
       </div>
-      <div>
-        <div className="row ">
-          <div className="card col-4 ">
-            <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <div>
-                <h4>Winter Wonderland Swim</h4>
-              </div>
-              <div>
-                <p>December 10, 2022 | 10am - 2pm | Aqua Swimmers Club Pool</p>
-              </div>
 
-              <p className="card-text">
-                Our annual Winter Wonderland Swim event was a huge success, with
-                swimmers of all ages enjoying the festive atmosphere and
-                friendly competition.
-              </p>
-              <div>
-                <button type="button" className="btn btn-primary">
-                  View Results
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="card col-4">
+      <section className="events-container">
+          <div className="card event-card">
             <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+              src="https://wallpapercave.com/wp/wp2046112.jpg"
               className="card-img-top"
-              alt="..."
+              alt="img"
             />
             <div className="card-body">
               <div>
-                <h4>Spring Splash</h4>
-              </div>
-              <div>
-                <p>April 22, 2023 | 9am - 3pm | Aqua Swimmers Club Pool</p>
+                <h4>Nairobi Annual Swimfest</h4>
               </div>
               <p className="card-text">
-                Our Spring Splash event was a celebration of the new season,
-                with swimmers showcasing their skills and enjoying the warm
-                weather.
+                Endurance Competition
               </p>
               <div>
-                <button type="button" className="btn btn-primary">
-                  View Results
-                </button>
+               <p>Alpha Team grabbed both gold and silver medals.Achieving the second fastet lap time in the competitions history</p>
               </div>
             </div>
           </div>
-          <div className="card col-4">
+          <div className="card event-card">
             <img
-              src="https://images.pexels.com/photos/1263425/pexels-photo-1263425.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+              src="https://wallpapercave.com/wp/wp2046118.jpg"
               className="card-img-top"
-              alt="..."
+              alt="img"
             />
             <div className="card-body">
               <div>
-                <h4>Aqua Gala</h4>
-              </div>
-              <div>
-                <p>
-                  June 3, 2023 | 6pm - 10pm | Aqua Swimmers Club Banquet Hall
-                </p>
+                <h4>Swimmersplash</h4>
               </div>
               <p className="card-text">
-                Our annual Aqua Gala was a night to remember, celebrating the
-                achievements of our swimmers and coaches with awards, dinner,
-                and dancing.
+                Three day training and competition.
               </p>
               <div>
-                <button type="button" className="btn btn-primary">
-                  View Results
-                </button>
+              <p>Bravo Team emerged victorious in both breaststroke and backstroke races </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div className="card event-card">
+            <img
+              src="https://wallpapercave.com/wp/wp2046159.jpg"
+              className="card-img-top"
+              alt="img"
+            />
+            <div className="card-body">
+              <div>
+                <h4>Kitui Annual Swimfest</h4>
+              </div>
+              <p className="card-text">
+                All Styles competition
+              </p>
+              <div>
+              <p>Delta team broke the record for fastest lap time in the competition equalling their own club record </p>
+              </div>
+            </div>
+          </div>
+      </section>
     </div>
   );
 }
-export default PastEvents;
+
+export default Pastevents;

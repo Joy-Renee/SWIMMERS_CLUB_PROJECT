@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'; // Importing ChevronLeft and ChevronRight icons from React Icons
+import { Link } from "react-router-dom";
 
 function Hero(){
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -26,10 +27,12 @@ function Hero(){
                         <h2 className="h">Welcome to Aqua Swimmers <br/> Club</h2>
                     </div>
                     <div>
-                        <p className="p text-secondary">Dive into a world of aquatic excellence at our premier swimming club. Offering top-notch facilities, expert coaching, and a vibrant community of swimmers and enthusiasts.</p>
+                        <p className="p text-white">Dive into a world of aquatic excellence at our premier swimming club. Offering top-notch facilities, expert coaching, and a vibrant community of swimmers and enthusiasts.</p>
                     </div>
                     <div>
-                        <button type="button" className="btn btn-primary">login</button>
+                    <Link to={`/swimmerslogin`} className="btn btn-primary">
+            Login
+          </Link>
                     </div>
                 </div>
                 <div className="col-5 gallery">
