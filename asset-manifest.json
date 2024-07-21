@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css",
-    "main.js": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/js/main.53b2a7d8.js",
-    "static/js/453.8ab44547.chunk.js": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/js/453.8ab44547.chunk.js",
-    "index.html": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/index.html",
-    "main.9a65e5d0.css.map": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css.map",
-    "main.53b2a7d8.js.map": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/js/main.53b2a7d8.js.map",
-    "453.8ab44547.chunk.js.map": "/Joy-Renee/SWIMMERS_CLUB_PROJECT/static/js/453.8ab44547.chunk.js.map"
+    "main.css": "/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css",
+    "main.js": "/SWIMMERS_CLUB_PROJECT/static/js/main.0e8f8df2.js",
+    "static/js/453.8ab44547.chunk.js": "/SWIMMERS_CLUB_PROJECT/static/js/453.8ab44547.chunk.js",
+    "index.html": "/SWIMMERS_CLUB_PROJECT/index.html",
+    "main.9a65e5d0.css.map": "/SWIMMERS_CLUB_PROJECT/static/css/main.9a65e5d0.css.map",
+    "main.0e8f8df2.js.map": "/SWIMMERS_CLUB_PROJECT/static/js/main.0e8f8df2.js.map",
+    "453.8ab44547.chunk.js.map": "/SWIMMERS_CLUB_PROJECT/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a65e5d0.css",
-    "static/js/main.53b2a7d8.js"
+    "static/js/main.0e8f8df2.js"
   ]
 }
