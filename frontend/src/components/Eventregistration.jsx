@@ -15,7 +15,7 @@ function EventRegistration() {
   });
 
   useEffect(() => {
-    fetch(`https://swimmers-club-project-ymun.onrender.com/${eventId}`, {
+    fetch(`https://swimmers-club-project-ymun.onrender.com/events/${eventId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
