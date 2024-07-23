@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://joy-renee.github.io/SWIMMERS_CLUB_PROJECT/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
